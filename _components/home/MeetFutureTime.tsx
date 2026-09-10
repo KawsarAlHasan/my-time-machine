@@ -64,7 +64,7 @@ export default function MeetFutureTime() {
   ];
 
   return (
-    <div className="min-h-[90vh] w-full bg-black py-16 lg:py-24 max-sm:px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
+    <div id="about-manny" className="min-h-[90vh] w-full bg-black py-16 lg:py-24 max-sm:px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
       <div className="mx-auto grid grid-cols-1 items-center gap-16 lg:grid-cols-9">
         {/* Left: Newspaper image card */}
         <div className="flex items-center justify-center rounded-2xl border border-[#3a2e1f] bg-black p-10 h-full w-full col-span-4">

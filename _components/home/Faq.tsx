@@ -42,10 +42,10 @@ export default function Faq() {
   };
 
   return (
-    <section className="w-full bg-black px-6 py-16 sm:py-24">
-      <div className="mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 px-6 sm:px-8 md:px-12 lg:px-20 xl:px-[12rem]">
+    <section id="contact" className="w-full bg-black px-6 py-16 sm:py-24">
+      <div className="mx-auto grid grid-cols-1 lg:grid-cols-11 gap-12 px-6 sm:px-8 md:px-12 lg:px-20 xl:px-48">
         {/* Left column */}
-        <div>
+        <div className="lg:col-span-6">
           {/* <p className="text-[10px] sm:text-xs tracking-[0.25em] text-orange-200/80 uppercase mb-4">
             Before your first jump
           </p> */}
@@ -72,7 +72,7 @@ export default function Faq() {
         </div>
 
         {/* Right column - Accordion */}
-        <div className="border-t border-white/15">
+        <div className="border-t border-white/15 lg:col-span-5">
           {faqItems.map((item, index) => {
             const isOpen = openIndex === index;
             return (

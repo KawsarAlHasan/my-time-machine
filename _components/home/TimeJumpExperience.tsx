@@ -16,7 +16,7 @@ function ArrowLine() {
 
 export default function TimeJumpExperience() {
   return (
-    <section className="relative w-full overflow-hidden bg-black min-h-[550px] md:min-h-[600px] lg:h-[70vh] lg:min-h-[650px] border-y border-[#423116]">
+    <section id="the-app" className="relative w-full overflow-hidden bg-black min-h-[550px] md:min-h-[600px] lg:h-[70vh] lg:min-h-[650px] border-y border-[#423116]">
       {/* Full-bleed background image */}
       <div className="absolute inset-0 z-0">
         <Image

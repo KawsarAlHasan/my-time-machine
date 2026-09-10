@@ -9,3 +9,7 @@
   /* General Sans → body/paragraph font */
   --font-family-general-sans: var(--font-general-sans), "Inter", "Helvetica Neue", sans-serif;
 }
+
+html {
+  scroll-behavior: smooth;
+}

@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import Image from "next/image";
 import PrimaryTitle from "../ui/PrimaryTitle";
 import SmallTitle from "../ui/SmallTitle";
@@ -38,7 +38,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="w-full bg-black px-10 py-[60px] pb-20 max-sm:px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
+    <section id="how-it-works" className="w-full bg-black px-10 py-[60px] pb-20 max-sm:px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
       {/* Header */}
       <div className="mb-12 text-center">
         <SmallTitle children="THE SIMPLE PROCESS" classNameText="" />
