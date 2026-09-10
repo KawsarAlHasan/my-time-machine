@@ -78,11 +78,11 @@ export default function DifferentJourneys() {
         className={getAnimationClasses("up", header.isVisible)}
       >
         <PrimaryTitle
-          classNameText="my-4! whitespace-nowrap! text-center!"
+          classNameText="my-4! text-center!"
           children="TWO DIFFERENT JOURNEYS."
         />
         <SecondaryTitle
-          classNameText="my-4! whitespace-nowrap! text-center!"
+          classNameText="my-4! text-center!"
           children="ONE BIG IDEA."
         />
       </div>

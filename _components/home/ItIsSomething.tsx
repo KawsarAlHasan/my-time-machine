@@ -30,8 +30,8 @@ export default function ItIsSomething() {
           fontSize="16px"
         />
 
-        <PrimaryTitle classNameText="my-4! whitespace-nowrap!" children="It Is something" />
-        <SecondaryTitle classNameText="my-4! whitespace-nowrap!" children="you create." />
+        <PrimaryTitle classNameText="my-4!" children="It Is something" />
+        <SecondaryTitle classNameText="my-4!" children="you create." />
 
         <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-200/90 font-light">
           Your choices today are writing tomorrow&apos;s story.

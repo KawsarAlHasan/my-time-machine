@@ -168,9 +168,9 @@ export default function VideoExplainer() {
             >
               <SmallTitle children="SEE IT IN ACTION" classNameText="" fontSize="12px" />
 
-              <PrimaryTitle classNameText="my-4! whitespace-nowrap!" children="YOUR FUTURE." />
-              <PrimaryTitle classNameText="my-4! whitespace-nowrap!" children="EXPLAINED" />
-              <SecondaryTitle classNameText="my-4! whitespace-nowrap!" children="IN 2 MINUTES." />
+              <PrimaryTitle classNameText="my-4!" children="YOUR FUTURE." />
+              <PrimaryTitle classNameText="my-4!" children="EXPLAINED" />
+              <SecondaryTitle classNameText="my-4!" children="IN 2 MINUTES." />
 
               <p className="text-gray-300 text-[15px] leading-relaxed max-w-md">
                 {content.description}

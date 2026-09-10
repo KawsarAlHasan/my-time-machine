@@ -28,13 +28,13 @@ export default function Hero() {
 
       {/* Content grid */}
       <div
-        className="relative z-10 mx-auto grid grid-cols-1 items-center lg:grid-cols-2 max-sm:px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48"
+        className="relative z-10 mx-auto grid grid-cols-1 items-center px-4 sm:px-8 md:px-12 lg:grid-cols-2 lg:px-20 xl:px-48"
         style={{ minHeight: "calc(100vh - 72px)" }}
       >
         {/* ── LEFT: copy ── */}
         <div
           ref={left.ref}
-          className={`flex flex-col justify-center ${getAnimationClasses("left", left.isVisible)}`}
+          className={`flex flex-col justify-center py-16 sm:py-20 lg:py-0 ${getAnimationClasses("left", left.isVisible)}`}
         >
           {/* Line 1: TWO BOOKS. */}
           <h1
@@ -42,11 +42,10 @@ export default function Hero() {
             style={{
               fontFamily: "var(--font-hyperspace), 'Arial Black', sans-serif",
               fontWeight: 200,
-              fontSize: "90px",
+              fontSize: "clamp(2.2rem, 8vw, 90px)",
               lineHeight: 1,
               letterSpacing: "0em",
               color: "#FFFFFF",
-              whiteSpace: "nowrap",
               filter: `
                 drop-shadow(0px 0px 8px rgba(23,66,239,0.8))
                 drop-shadow(0px 0px 20px rgba(23,66,239,0.6))
@@ -60,15 +59,14 @@ export default function Hero() {
 
           {/* Line 2: ONE TIME */}
           <h1
-            className={`my-3 uppercase`}
+            className="my-3 uppercase"
             style={{
               fontFamily: "var(--font-hyperspace), 'Arial Black', sans-serif",
               fontWeight: 200,
-              fontSize: "90px",
+              fontSize: "clamp(2.2rem, 8vw, 90px)",
               lineHeight: 1,
               letterSpacing: "0em",
               color: "#FFFFFF",
-              whiteSpace: "nowrap",
               filter: `
           drop-shadow(2px 2px 16px rgba(236,126,28,0.5))
           drop-shadow(-2px -2px 16px rgba(236,126,28,0.5))
@@ -80,15 +78,14 @@ export default function Hero() {
 
           {/* Line 3: MACHINE */}
           <h1
-            className={` uppercase`}
+            className="uppercase"
             style={{
               fontFamily: "var(--font-hyperspace), 'Arial Black', sans-serif",
               fontWeight: 200,
-              fontSize: "90px",
+              fontSize: "clamp(2.2rem, 8vw, 90px)",
               lineHeight: 1,
               letterSpacing: "0em",
               color: "#FFFFFF",
-              whiteSpace: "nowrap",
               filter: `
           drop-shadow(2px 2px 16px rgba(236,126,28,0.5))
           drop-shadow(-2px -2px 16px rgba(236,126,28,0.5))
@@ -99,46 +96,39 @@ export default function Hero() {
           </h1>
 
           {/* Body copy */}
-          <div className="mt-6 max-w-[340px]">
+          <div className="mt-5 sm:mt-6 max-w-[340px]">
             <p
               className="text-[14px] leading-relaxed text-gray-300"
-              style={{
-                fontFamily: "var(--font-general-sans), 'Inter', sans-serif",
-              }}
+              style={{ fontFamily: "var(--font-general-sans), 'Inter', sans-serif" }}
             >
               One explains the philosophy.
             </p>
             <p
               className="text-[14px] leading-relaxed text-gray-300"
-              style={{
-                fontFamily: "var(--font-general-sans), 'Inter', sans-serif",
-              }}
+              style={{ fontFamily: "var(--font-general-sans), 'Inter', sans-serif" }}
             >
               One takes you on the adventure.
             </p>
           </div>
 
           {/* CTA button */}
-          <div className="mt-8">
+          <div className="mt-7 sm:mt-8">
             <PrimaryButton htmlContent="EXPLORE THE BOOK" isRightArrow={true} />
           </div>
         </div>
 
-        {/* ── RIGHT: book covers ── */}
+        {/* ── RIGHT: book covers (desktop only) ── */}
         <div className="relative hidden lg:flex items-center justify-center h-full">
           <div
             ref={right.ref}
             className={`relative ${getAnimationClasses("right", right.isVisible)}`}
-            style={{
-              width: "850px",
-              height: "850px",
-            }}
+            style={{ width: "min(850px, 50vw)", height: "min(850px, 50vw)" }}
           >
             <Image
               src="/images/book.png"
               alt="Back From The Future book covers"
               fill
-              sizes="820px"
+              sizes="(max-width: 1280px) 45vw, 820px"
               className="object-contain object-center"
               style={{
                 filter:

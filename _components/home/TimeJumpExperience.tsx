@@ -35,7 +35,7 @@ export default function TimeJumpExperience() {
       </div>
 
       {/* Content grid */}
-      <div className="relative z-10 mx-auto grid h-full grid-cols-1 items-center px-6 lg:grid-cols-2 lg:px-48">
+      <div className="relative z-10 mx-auto grid h-full grid-cols-1 items-center px-4 sm:px-8 md:px-12 lg:grid-cols-2 lg:px-20 xl:px-48">
         {/* ── LEFT: copy ── */}
         <div
           ref={left.ref}
@@ -44,8 +44,8 @@ export default function TimeJumpExperience() {
           <div className="max-w-xl w-full">
             <SmallTitle children="YOUR FUTURE IS WAITING" classNameText="" fontSize="12px" />
 
-            <PrimaryTitle classNameText="my-4! whitespace-nowrap!" children="Start your" />
-            <SecondaryTitle classNameText="my-4! whitespace-nowrap!" children="Time Jump." />
+            <PrimaryTitle classNameText="my-4!" children="Start your" />
+            <SecondaryTitle classNameText="my-4!" children="Time Jump." />
 
             <p className="text-gray-300/90 text-lg mt-8 max-w-md">
               Take your first Time Jump and discover where your choices could lead.

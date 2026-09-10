@@ -17,22 +17,10 @@ function AppleIcon({ className }: any) {
 function PlayIcon({ className }: any) {
   return (
     <svg viewBox="0 0 512 512" className={className}>
-      <path
-        fill="#00d9ff"
-        d="M99 47.6c-6 6.3-9.5 16-9.5 28.6v359.6c0 12.6 3.5 22.3 9.5 28.6l1.5 1.4L311 245.3v-4.6L100.5 46.2 99 47.6z"
-      />
-      <path
-        fill="#00f076"
-        d="M381 315.9l-70-70v-4.6l70-70 1.6.9 82.9 47.1c23.7 13.5 23.7 35.5 0 49l-83 47.1-1.5.5z"
-      />
-      <path
-        fill="#ff3a44"
-        d="M382.5 315.4L311 243.9 99 456c7.8 8.2 20.6 9.2 35.1 1L382.5 315.4"
-      />
-      <path
-        fill="#ffcf00"
-        d="M382.5 172.6L134.1 30.9C119.6 22.7 106.8 23.7 99 32l212 212 71.5-71.4z"
-      />
+      <path fill="#00d9ff" d="M99 47.6c-6 6.3-9.5 16-9.5 28.6v359.6c0 12.6 3.5 22.3 9.5 28.6l1.5 1.4L311 245.3v-4.6L100.5 46.2 99 47.6z" />
+      <path fill="#00f076" d="M381 315.9l-70-70v-4.6l70-70 1.6.9 82.9 47.1c23.7 13.5 23.7 35.5 0 49l-83 47.1-1.5.5z" />
+      <path fill="#ff3a44" d="M382.5 315.4L311 243.9 99 456c7.8 8.2 20.6 9.2 35.1 1L382.5 315.4" />
+      <path fill="#ffcf00" d="M382.5 172.6L134.1 30.9C119.6 22.7 106.8 23.7 99 32l212 212 71.5-71.4z" />
     </svg>
   );
 }
@@ -44,8 +32,9 @@ export default function StartYourTimeJump() {
   const btn2 = useScrollAnimation({ direction: "up", delay: 550, threshold: 0.1 });
 
   return (
-    <div className="w-full grid grid-cols-2 bg-[#000000] border-y-1 border-[#423116]">
-      <div className="max-sm:pl-4 sm:pl-8 md:pl-12 lg:pl-20 xl:pl-[12rem] text-amber-50 flex items-center">
+    <div className="w-full grid grid-cols-1 md:grid-cols-2 bg-[#000000] border-y border-[#423116]">
+      {/* Left: Text Content */}
+      <div className="px-4 py-12 sm:px-8 md:px-12 lg:px-20 xl:pl-48 text-amber-50 flex items-center">
         <div
           ref={left.ref}
           className={`max-w-xl w-full ${getAnimationClasses("left", left.isVisible)}`}
@@ -54,12 +43,12 @@ export default function StartYourTimeJump() {
           <PrimaryTitle classNameText="my-4!" children="Start your" />
           <SecondaryTitle classNameText="my-4!" children="Time Jump" />
 
-          <p className="text-gray-300/90 text-lg mt-8 max-w-md">
+          <p className="text-gray-300/90 text-base sm:text-lg mt-6 sm:mt-8 max-w-md">
             Take your first Time Jump and discover where your choices could lead.
           </p>
 
           {/* Store badges */}
-          <div className="flex flex-wrap gap-4 mt-10">
+          <div className="flex flex-wrap gap-4 mt-8 sm:mt-10">
             {/* App Store */}
             <div ref={btn1.ref} className={getAnimationClasses("up", btn1.isVisible)}>
               <a
@@ -100,11 +89,17 @@ export default function StartYourTimeJump() {
           </div>
         </div>
       </div>
+
+      {/* Right: Image */}
       <div
         ref={right.ref}
-        className={getAnimationClasses("right", right.isVisible)}
+        className={`flex items-center justify-center overflow-hidden ${getAnimationClasses("right", right.isVisible)}`}
       >
-        <img src="/images/TimeJump.png" alt="start-time" />
+        <img
+          src="/images/TimeJump.png"
+          alt="start-time"
+          className="w-full h-auto max-h-[500px] object-contain md:max-h-none"
+        />
       </div>
     </div>
   );

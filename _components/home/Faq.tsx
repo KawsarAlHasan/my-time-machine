@@ -45,8 +45,8 @@ export default function Faq() {
   };
 
   return (
-    <section id="contact" className="w-full bg-black px-6 py-16 sm:py-24">
-      <div className="mx-auto grid grid-cols-1 lg:grid-cols-11 gap-12 px-6 sm:px-8 md:px-12 lg:px-20 xl:px-48">
+    <section id="contact" className="w-full bg-black px-4 py-16 sm:px-8 sm:py-24 md:px-12 lg:px-20 xl:px-48">
+      <div className="mx-auto grid grid-cols-1 lg:grid-cols-11 gap-12">
         {/* Left column */}
         <div
           ref={leftCol.ref}
@@ -54,8 +54,8 @@ export default function Faq() {
         >
           <SmallTitle children="Before your first jump" classNameText="" fontSize="16px" />
 
-          <PrimaryTitle classNameText="my-4! whitespace-nowrap!" children="Questions before" />
-          <SecondaryTitle classNameText="my-4! whitespace-nowrap!" children="your first jump?" />
+          <PrimaryTitle classNameText="my-4!" children="Questions before" />
+          <SecondaryTitle classNameText="my-4!" children="your first jump?" />
 
           <p className="mt-6 text-sm sm:text-base text-gray-300 leading-relaxed">
             We want you to feel clear before you step into the experience.

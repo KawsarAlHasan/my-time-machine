@@ -3,8 +3,6 @@
 import React from "react";
 import { useScrollAnimation, getAnimationClasses } from "../ui/useScrollAnimation";
 
-// ---- Types -----------------------------------------------------------------
-
 type IconType = "gauge" | "clock" | "target";
 
 interface StatItem {
@@ -22,7 +20,8 @@ const stats: StatItem[] = [
 export default function SimpleSection() {
   return (
     <div className="w-full">
-      <div className="mx-auto flex items-center justify-center divide-x-2 divide-orange-300 px-6 py-6">
+      {/* Stats grid — stacks on mobile, side-by-side on sm+ */}
+      <div className="mx-auto grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x-2 divide-orange-300 px-4 sm:px-8">
         {stats.map((stat, i) => (
           <AnimatedStat key={stat.id} stat={stat} index={i} />
         ))}
@@ -44,10 +43,10 @@ function AnimatedStat({ stat, index }: { stat: StatItem; index: number }) {
   return (
     <div
       ref={anim.ref}
-      className={`flex items-center gap-3 px-8 md:px-12 lg:px-20 xl:px-[140px] ${getAnimationClasses("up", anim.isVisible)}`}
+      className={`flex items-center justify-center gap-3 px-6 py-5 sm:py-6 ${getAnimationClasses("up", anim.isVisible)}`}
     >
       <StatIcon type={stat.icon} />
-      <span className="text-gray-300 text-sm tracking-wide font-medium whitespace-nowrap">
+      <span className="text-gray-300 text-xs sm:text-sm tracking-wide font-medium text-center sm:text-left">
         {stat.text}
       </span>
     </div>

@@ -55,7 +55,7 @@ export default function Footer() {
         </nav>
 
         {/* Divider */}
-        <div className="mt-10 sm:mt-12 border-t border-[#423116] mx-[-8rem] sm:mx-[-8rem] md:mx-[-8rem] lg:mx-[-8rem] xl:mx-[-12rem]" />
+        <div className="mt-10 sm:mt-12 border-t border-[#423116] w-full" />
 
         {/* Bottom Row */}
         <div

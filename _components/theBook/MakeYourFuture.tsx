@@ -13,7 +13,7 @@ export default function MakeYourFuture() {
   const rightImg = useScrollAnimation({ direction: "right", delay: 0, threshold: 0.1 });
 
   return (
-    <section className="relative w-full bg-black" style={{ height: "659px" }}>
+    <section className="relative w-full bg-black min-h-[500px] md:min-h-[600px] lg:min-h-[659px] py-16 lg:py-0">
       {/* ── LEFT: sun/fire image ── */}
       <div
         ref={leftImg.ref}
@@ -24,7 +24,7 @@ export default function MakeYourFuture() {
           src="/images/left-bg.png"
           alt="Fiery sun background"
           fill
-          sizes="20vw"
+          sizes="50vw"
           className="object-cover object-center"
         />
         {/* fade right into black */}
@@ -47,7 +47,7 @@ export default function MakeYourFuture() {
           src="/images/right-bg.png"
           alt="Blue planet background"
           fill
-          sizes="20vw"
+          sizes="50vw"
           className="object-cover object-center"
         />
         {/* fade left into black */}
@@ -61,32 +61,30 @@ export default function MakeYourFuture() {
       </div>
 
       {/* ── CENTER content ── */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center max-sm:px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
+      <div className="relative z-10 flex min-h-[inherit] items-center justify-center px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
         <div
           ref={center.ref}
-          className={`w-full rounded-[22px] border border-white/40 bg-black/20 px-6 py-10 sm:px-14 sm:py-12 text-center flex flex-col justify-center items-center ${getAnimationClasses("up", center.isVisible)}`}
+          className={`w-full rounded-[22px] border border-white/40 bg-black/20 px-5 py-10 sm:px-10 sm:py-12 md:px-14 text-center flex flex-col justify-center items-center ${getAnimationClasses("up", center.isVisible)}`}
         >
-          <div className="">
-            {/* Heading */}
-            <PrimaryTitle
-              classNameText="my-4! whitespace-nowrap! !text-[40px]"
-              children="MAKE YOUR FUTURE VIVID ENOUGH"
-            />
-            <SecondaryTitle
-              classNameText="my-7! whitespace-nowrap! !text-[40px]"
-              children="TO CHANGE WHAT YOU DO TODAY."
-            />
+          {/* Heading */}
+          <PrimaryTitle
+            classNameText="my-4! text-center!"
+            children="MAKE YOUR FUTURE VIVID ENOUGH"
+          />
+          <SecondaryTitle
+            classNameText="my-7! text-center!"
+            children="TO CHANGE WHAT YOU DO TODAY."
+          />
 
-            {/* Subtext */}
-            <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-200/90 font-light">
-              Book it. Read it. Experience it. Then step inside your own Time
-              Machine.
-            </p>
+          {/* Subtext */}
+          <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-200/90 font-light max-w-md">
+            Book it. Read it. Experience it. Then step inside your own Time
+            Machine.
+          </p>
 
-            {/* CTA Button */}
-            <div className="mt-7 sm:mt-9 flex justify-center">
-              <PrimaryButton htmlContent="START MY TIME JUMP" isRightArrow={true} />
-            </div>
+          {/* CTA Button */}
+          <div className="mt-7 sm:mt-9 flex justify-center">
+            <PrimaryButton htmlContent="START MY TIME JUMP" isRightArrow={true} />
           </div>
         </div>
       </div>

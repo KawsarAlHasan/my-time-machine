@@ -74,8 +74,8 @@ export default function MeetFutureTime() {
         >
           <SmallTitle children="FUTURE TIMES" classNameText="" fontSize="12px" />
 
-          <PrimaryTitle classNameText="my-4! whitespace-nowrap!" children="Meet your" />
-          <SecondaryTitle classNameText="my-4! whitespace-nowrap!" children="Future Times." />
+          <PrimaryTitle classNameText="my-4!" children="Meet your" />
+          <SecondaryTitle classNameText="my-4!" children="Future Times." />
 
           <p className="mt-6 max-w-md text-gray-300">
             Your Future Times transforms your current trajectory into a

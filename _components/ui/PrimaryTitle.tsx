@@ -29,7 +29,7 @@ export default function PrimaryTitle({
       style={{
         fontFamily: "var(--font-hyperspace), 'Arial Black', sans-serif",
         fontWeight: 200,
-        fontSize: "56px",
+        fontSize: "clamp(2rem, 5vw, 56px)",
         lineHeight: 1,
         letterSpacing: "0em",
         color: "#FFFFFF",
