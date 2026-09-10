@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 import PrimaryTitle from "../ui/PrimaryTitle";
 import SecondaryTitle from "../ui/SecondaryTitle";
 import SmallTitle from "../ui/SmallTitle";
+import { useScrollAnimation, getAnimationClasses } from "../ui/useScrollAnimation";
 
 const content = {
   description:
@@ -42,9 +43,12 @@ export default function VideoExplainer() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
+  const videoAnim = useScrollAnimation({ direction: "left", delay: 100, threshold: 0.1 });
+  const textAnim = useScrollAnimation({ direction: "right", delay: 250, threshold: 0.1 });
+  const wrapperAnim = useScrollAnimation({ direction: "up", delay: 0, threshold: 0.1 });
+
   const handlePlay = () => {
     setIsPlaying(true);
-    // Small delay so the video element renders before calling play
     setTimeout(() => {
       videoRef.current?.play();
     }, 50);
@@ -76,7 +80,11 @@ export default function VideoExplainer() {
       ref={sectionRef}
       className="w-full bg-black px-6 py-20 flex items-center justify-center max-sm:px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48"
     >
-      <div className="relative w-full" style={{ padding: 2 }}>
+      <div
+        ref={wrapperAnim.ref}
+        className={`relative w-full ${getAnimationClasses("up", wrapperAnim.isVisible)}`}
+        style={{ padding: 2 }}
+      >
         {/* Glowing clipped border */}
         <div
           className="absolute inset-0"
@@ -93,10 +101,12 @@ export default function VideoExplainer() {
         <div className="relative bg-black" style={{ clipPath: innerClip }}>
           <div className="flex flex-col md:flex-row items-center gap-10 px-8 py-10 md:px-10 md:py-12">
             {/* ── Video card ─────────────────────────────────────────────── */}
-            <div className="w-full md:w-[46%] flex-shrink-0">
+            <div
+              ref={videoAnim.ref}
+              className={`w-full md:w-[46%] flex-shrink-0 ${getAnimationClasses("left", videoAnim.isVisible)}`}
+            >
               <div className="relative rounded-2xl overflow-hidden bg-black aspect-[16/10]">
                 {isPlaying ? (
-                  /* Actual video player */
                   <video
                     ref={videoRef}
                     src={content.video.src}
@@ -107,7 +117,6 @@ export default function VideoExplainer() {
                     onEnded={() => setIsPlaying(false)}
                   />
                 ) : (
-                  /* Thumbnail + custom play button overlay */
                   <>
                     <img
                       src={content.video.thumbnail}
@@ -153,25 +162,15 @@ export default function VideoExplainer() {
             </div>
 
             {/* ── Text content ───────────────────────────────────────────── */}
-            <div className="flex-1">
-              <SmallTitle
-                children="SEE IT IN ACTION"
-                classNameText=""
-                fontSize="12px"
-              />
+            <div
+              ref={textAnim.ref}
+              className={`flex-1 ${getAnimationClasses("right", textAnim.isVisible)}`}
+            >
+              <SmallTitle children="SEE IT IN ACTION" classNameText="" fontSize="12px" />
 
-              <PrimaryTitle
-                classNameText="my-4! whitespace-nowrap!"
-                children="YOUR FUTURE."
-              />
-              <PrimaryTitle
-                classNameText="my-4! whitespace-nowrap!"
-                children="EXPLAINED"
-              />
-              <SecondaryTitle
-                classNameText="my-4! whitespace-nowrap!"
-                children="IN 2 MINUTES."
-              />
+              <PrimaryTitle classNameText="my-4! whitespace-nowrap!" children="YOUR FUTURE." />
+              <PrimaryTitle classNameText="my-4! whitespace-nowrap!" children="EXPLAINED" />
+              <SecondaryTitle classNameText="my-4! whitespace-nowrap!" children="IN 2 MINUTES." />
 
               <p className="text-gray-300 text-[15px] leading-relaxed max-w-md">
                 {content.description}
@@ -180,25 +179,13 @@ export default function VideoExplainer() {
           </div>
         </div>
 
-        {/* Decorative corner accents (match the cut corners) */}
+        {/* Decorative corner accents */}
         {/* Top-left */}
-        <span
-          className="absolute bg-blue-400/60"
-          style={{ left: 0, top: CUT - 1, width: 2, height: 20 }}
-        />
-        <span
-          className="absolute bg-blue-400/60"
-          style={{ left: CUT - 1, top: 0, width: 20, height: 2 }}
-        />
+        <span className="absolute bg-blue-400/60" style={{ left: 0, top: CUT - 1, width: 2, height: 20 }} />
+        <span className="absolute bg-blue-400/60" style={{ left: CUT - 1, top: 0, width: 20, height: 2 }} />
         {/* Bottom-right */}
-        <span
-          className="absolute bg-blue-400/60"
-          style={{ right: 0, bottom: CUT - 1, width: 2, height: 20 }}
-        />
-        <span
-          className="absolute bg-blue-400/60"
-          style={{ right: CUT - 1, bottom: 0, width: 20, height: 2 }}
-        />
+        <span className="absolute bg-blue-400/60" style={{ right: 0, bottom: CUT - 1, width: 2, height: 20 }} />
+        <span className="absolute bg-blue-400/60" style={{ right: CUT - 1, bottom: 0, width: 20, height: 2 }} />
       </div>
     </div>
   );

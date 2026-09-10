@@ -1,8 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import PrimaryButton from "../ui/PrimaryButton";
 import SecondaryButton from "../ui/SecondaryButton";
+import { useScrollAnimation, getAnimationClasses } from "../ui/useScrollAnimation";
 
 export default function Hero() {
+  const left = useScrollAnimation({ direction: "left", delay: 100 });
+  const right = useScrollAnimation({ direction: "right", delay: 300 });
+  const badge1 = useScrollAnimation({ direction: "up", delay: 600 });
+  const badge2 = useScrollAnimation({ direction: "up", delay: 750 });
+
   return (
     <section
       className="relative w-full overflow-hidden bg-black"
@@ -15,24 +23,8 @@ export default function Hero() {
           alt="Two glowing timeline portals with a silhouetted figure standing between them"
           fill
           className="h-full!"
-          // className="object-contain object-center lg:object-right"
-          // className="object-contain object-center lg:object-center"
           priority
         />
-        {/* <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to right, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.82) 35%, rgba(0,0,0,0.25) 65%, rgba(0,0,0,0) 100%)",
-          }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 30%)",
-          }}
-        /> */}
       </div>
 
       {/* Content grid */}
@@ -41,7 +33,10 @@ export default function Hero() {
         style={{ minHeight: "calc(100vh - 72px)" }}
       >
         {/* ── LEFT: copy ── */}
-        <div className="flex flex-col justify-center py-20 lg:py-0">
+        <div
+          ref={left.ref}
+          className={`flex flex-col justify-center py-20 lg:py-0 ${getAnimationClasses("left", left.isVisible)}`}
+        >
           {/* Headline */}
           <h1
             className="font-extrabold uppercase leading-[1.05] tracking-tight"
@@ -136,24 +131,26 @@ export default function Hero() {
 
           {/* CTA buttons */}
           <div className="mt-9 flex flex-wrap items-center gap-4">
-            {/* Primary */}
-            <PrimaryButton
-              htmlContent="START MY TIME JUMP"
-              isRightArrow={true}
-            />
-
-            {/* Secondary */}
-            <SecondaryButton
-              htmlContent="Watch How It Works"
-              isPlayIcon={true}
-            />
+            <div ref={badge1.ref} className={getAnimationClasses("up", badge1.isVisible)}>
+              <PrimaryButton
+                htmlContent="START MY TIME JUMP"
+                isRightArrow={true}
+              />
+            </div>
+            <div ref={badge2.ref} className={getAnimationClasses("up", badge2.isVisible)}>
+              <SecondaryButton
+                htmlContent="Watch How It Works"
+                isPlayIcon={true}
+              />
+            </div>
           </div>
         </div>
 
         {/* ── RIGHT: phone mockup ── */}
         <div className="relative hidden lg:flex items-center justify-end h-full">
           <div
-            className="relative"
+            ref={right.ref}
+            className={`relative ${getAnimationClasses("right", right.isVisible)}`}
             style={{
               width: "400px",
               height: "700px",
@@ -165,6 +162,7 @@ export default function Hero() {
               src="/images/phone-mock.png"
               alt="My Time Machine app preview on a phone screen"
               fill
+              sizes="400px"
               className="object-contain object-bottom"
               style={{
                 filter: "drop-shadow(0 40px 80px rgba(0,0,0,0.9))",

@@ -1,7 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import PrimaryButton from "../ui/PrimaryButton";
+import { useScrollAnimation, getAnimationClasses } from "../ui/useScrollAnimation";
 
 export default function Hero() {
+  const left = useScrollAnimation({ direction: "left", delay: 100 });
+  const right = useScrollAnimation({ direction: "right", delay: 300 });
+
   return (
     <section
       className="relative w-full overflow-hidden bg-black"
@@ -26,7 +32,10 @@ export default function Hero() {
         style={{ minHeight: "calc(100vh - 72px)" }}
       >
         {/* ── LEFT: copy ── */}
-        <div className="flex flex-col justify-center">
+        <div
+          ref={left.ref}
+          className={`flex flex-col justify-center ${getAnimationClasses("left", left.isVisible)}`}
+        >
           {/* Line 1: TWO BOOKS. */}
           <h1
             className="block!"
@@ -118,7 +127,8 @@ export default function Hero() {
         {/* ── RIGHT: book covers ── */}
         <div className="relative hidden lg:flex items-center justify-center h-full">
           <div
-            className="relative"
+            ref={right.ref}
+            className={`relative ${getAnimationClasses("right", right.isVisible)}`}
             style={{
               width: "850px",
               height: "850px",

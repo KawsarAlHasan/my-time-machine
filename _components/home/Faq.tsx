@@ -5,6 +5,7 @@ import { HiChevronDown, HiChevronUp } from "react-icons/hi2";
 import PrimaryTitle from "../ui/PrimaryTitle";
 import SecondaryTitle from "../ui/SecondaryTitle";
 import SmallTitle from "../ui/SmallTitle";
+import { useScrollAnimation, getAnimationClasses } from "../ui/useScrollAnimation";
 
 const faqItems = [
   {
@@ -36,6 +37,8 @@ const faqItems = [
 
 export default function Faq() {
   const [openIndex, setOpenIndex] = useState(0);
+  const leftCol = useScrollAnimation({ direction: "left", delay: 100, threshold: 0.1 });
+  const rightCol = useScrollAnimation({ direction: "right", delay: 200, threshold: 0.1 });
 
   const toggleItem = (index: number) => {
     setOpenIndex((prev) => (prev === index ? -1 : index));
@@ -45,24 +48,14 @@ export default function Faq() {
     <section id="contact" className="w-full bg-black px-6 py-16 sm:py-24">
       <div className="mx-auto grid grid-cols-1 lg:grid-cols-11 gap-12 px-6 sm:px-8 md:px-12 lg:px-20 xl:px-48">
         {/* Left column */}
-        <div className="lg:col-span-6">
-          {/* <p className="text-[10px] sm:text-xs tracking-[0.25em] text-orange-200/80 uppercase mb-4">
-            Before your first jump
-          </p> */}
-          <SmallTitle
-            children="Before your first jump"
-            classNameText=""
-            fontSize="16px"
-          />
+        <div
+          ref={leftCol.ref}
+          className={`lg:col-span-6 ${getAnimationClasses("left", leftCol.isVisible)}`}
+        >
+          <SmallTitle children="Before your first jump" classNameText="" fontSize="16px" />
 
-          <PrimaryTitle
-            classNameText="my-4! whitespace-nowrap!"
-            children="Questions before"
-          />
-          <SecondaryTitle
-            classNameText="my-4! whitespace-nowrap!"
-            children="your first jump?"
-          />
+          <PrimaryTitle classNameText="my-4! whitespace-nowrap!" children="Questions before" />
+          <SecondaryTitle classNameText="my-4! whitespace-nowrap!" children="your first jump?" />
 
           <p className="mt-6 text-sm sm:text-base text-gray-300 leading-relaxed">
             We want you to feel clear before you step into the experience.
@@ -72,7 +65,10 @@ export default function Faq() {
         </div>
 
         {/* Right column - Accordion */}
-        <div className="border-t border-white/15 lg:col-span-5">
+        <div
+          ref={rightCol.ref}
+          className={`border-t border-white/15 lg:col-span-5 ${getAnimationClasses("right", rightCol.isVisible)}`}
+        >
           {faqItems.map((item, index) => {
             const isOpen = openIndex === index;
             return (
@@ -80,15 +76,15 @@ export default function Faq() {
                 <button
                   type="button"
                   onClick={() => toggleItem(index)}
-                  className="w-full flex items-center justify-between gap-4 py-5 sm:py-6 text-left"
+                  className="w-full flex items-center justify-between gap-4 py-5 sm:py-6 text-left group"
                 >
-                  <span className="text-base sm:text-lg text-white">
+                  <span className="text-base sm:text-lg text-white group-hover:text-orange-300 transition-colors duration-200">
                     {item.question}
                   </span>
                   {isOpen ? (
-                    <HiChevronUp className="shrink-0 text-white text-lg sm:text-xl" />
+                    <HiChevronUp className="shrink-0 text-orange-400 text-lg sm:text-xl transition-transform duration-300" />
                   ) : (
-                    <HiChevronDown className="shrink-0 text-white text-lg sm:text-xl" />
+                    <HiChevronDown className="shrink-0 text-white text-lg sm:text-xl transition-transform duration-300" />
                   )}
                 </button>
 

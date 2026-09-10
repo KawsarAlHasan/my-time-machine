@@ -1,7 +1,10 @@
+"use client";
+
 import React from "react";
 import PrimaryTitle from "../ui/PrimaryTitle";
 import SecondaryTitle from "../ui/SecondaryTitle";
 import SmallTitle from "../ui/SmallTitle";
+import { useScrollAnimation, getAnimationClasses } from "../ui/useScrollAnimation";
 
 function AppleIcon({ className }: any) {
   return (
@@ -35,77 +38,72 @@ function PlayIcon({ className }: any) {
 }
 
 export default function StartYourTimeJump() {
+  const left = useScrollAnimation({ direction: "left", delay: 100, threshold: 0.1 });
+  const right = useScrollAnimation({ direction: "right", delay: 200, threshold: 0.1 });
+  const btn1 = useScrollAnimation({ direction: "up", delay: 400, threshold: 0.1 });
+  const btn2 = useScrollAnimation({ direction: "up", delay: 550, threshold: 0.1 });
+
   return (
     <div className="w-full grid grid-cols-2 bg-[#000000] border-y-1 border-[#423116]">
       <div className="max-sm:pl-4 sm:pl-8 md:pl-12 lg:pl-20 xl:pl-[12rem] text-amber-50 flex items-center">
-        <div className="max-w-xl w-full">
-          {/* Eyebrow label */}
-          {/* <p className="text-[13px] tracking-[0.25em] text-orange-400/90 font-medium mb-6">
-            YOUR FUTURE IS WAITING
-          </p> */}
-          <SmallTitle
-            children="YOUR FUTURE IS WAITING"
-            classNameText=""
-            fontSize="16px"
-          />
-
+        <div
+          ref={left.ref}
+          className={`max-w-xl w-full ${getAnimationClasses("left", left.isVisible)}`}
+        >
+          <SmallTitle children="YOUR FUTURE IS WAITING" classNameText="" fontSize="16px" />
           <PrimaryTitle classNameText="my-4!" children="Start your" />
-
           <SecondaryTitle classNameText="my-4!" children="Time Jump" />
 
-          {/* Subtext */}
           <p className="text-gray-300/90 text-lg mt-8 max-w-md">
-            Take your first Time Jump and discover where your choices could
-            lead.
+            Take your first Time Jump and discover where your choices could lead.
           </p>
 
           {/* Store badges */}
           <div className="flex flex-wrap gap-4 mt-10">
             {/* App Store */}
-            <a
-              href="#"
-              className="flex items-center gap-3 rounded-xl border px-5 py-3 transition-transform hover:scale-[1.03]"
-              style={{
-                borderColor: "rgba(251,146,60,0.7)",
-                boxShadow:
-                  "0 0 10px rgba(251,146,60,0.35), inset 0 0 10px rgba(251,146,60,0.05)",
-                background: "rgba(0,0,0,0.4)",
-              }}
-            >
-              <AppleIcon className="w-7 h-7 text-sky-400" />
-              <span className="flex flex-col leading-tight">
-                <span className="text-[11px] text-gray-300">
-                  Download on the
+            <div ref={btn1.ref} className={getAnimationClasses("up", btn1.isVisible)}>
+              <a
+                href="#"
+                className="flex items-center gap-3 rounded-xl border px-5 py-3 transition-all duration-300 hover:scale-[1.05] hover:shadow-[0_0_20px_rgba(251,146,60,0.5)]"
+                style={{
+                  borderColor: "rgba(251,146,60,0.7)",
+                  boxShadow: "0 0 10px rgba(251,146,60,0.35), inset 0 0 10px rgba(251,146,60,0.05)",
+                  background: "rgba(0,0,0,0.4)",
+                }}
+              >
+                <AppleIcon className="w-7 h-7 text-sky-400" />
+                <span className="flex flex-col leading-tight">
+                  <span className="text-[11px] text-gray-300">Download on the</span>
+                  <span className="text-white text-base font-semibold">App Store</span>
                 </span>
-                <span className="text-white text-base font-semibold">
-                  App Store
-                </span>
-              </span>
-            </a>
+              </a>
+            </div>
 
             {/* Google Play */}
-            <a
-              href="#"
-              className="flex items-center gap-3 rounded-xl border px-5 py-3 transition-transform hover:scale-[1.03]"
-              style={{
-                borderColor: "rgba(96,165,250,0.7)",
-                boxShadow:
-                  "0 0 10px rgba(96,165,250,0.35), inset 0 0 10px rgba(96,165,250,0.05)",
-                background: "rgba(0,0,0,0.4)",
-              }}
-            >
-              <PlayIcon className="w-7 h-7" />
-              <span className="flex flex-col leading-tight">
-                <span className="text-[11px] text-gray-300">Get it on</span>
-                <span className="text-white text-base font-semibold">
-                  Google Play
+            <div ref={btn2.ref} className={getAnimationClasses("up", btn2.isVisible)}>
+              <a
+                href="#"
+                className="flex items-center gap-3 rounded-xl border px-5 py-3 transition-all duration-300 hover:scale-[1.05] hover:shadow-[0_0_20px_rgba(96,165,250,0.5)]"
+                style={{
+                  borderColor: "rgba(96,165,250,0.7)",
+                  boxShadow: "0 0 10px rgba(96,165,250,0.35), inset 0 0 10px rgba(96,165,250,0.05)",
+                  background: "rgba(0,0,0,0.4)",
+                }}
+              >
+                <PlayIcon className="w-7 h-7" />
+                <span className="flex flex-col leading-tight">
+                  <span className="text-[11px] text-gray-300">Get it on</span>
+                  <span className="text-white text-base font-semibold">Google Play</span>
                 </span>
-              </span>
-            </a>
+              </a>
+            </div>
           </div>
         </div>
       </div>
-      <div>
+      <div
+        ref={right.ref}
+        className={getAnimationClasses("right", right.isVisible)}
+      >
         <img src="/images/TimeJump.png" alt="start-time" />
       </div>
     </div>

@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { useScrollAnimation, getAnimationClasses } from "../ui/useScrollAnimation";
 
 // ---- Types -----------------------------------------------------------------
 
@@ -10,8 +13,6 @@ interface StatItem {
   text: string;
 }
 
-// ---- Data --------------------------------------------------------------
-
 const stats: StatItem[] = [
   { id: "questions", icon: "gauge", text: "5 ADAPTIVE QUESTIONS" },
   { id: "time", icon: "clock", text: "ABOUT 2 MINUTES" },
@@ -22,16 +23,8 @@ export default function SimpleSection() {
   return (
     <div className="w-full">
       <div className="mx-auto flex items-center justify-center divide-x-2 divide-orange-300 px-6 py-6">
-        {stats.map((stat) => (
-          <div
-            key={stat.id}
-            className="flex items-center gap-3 px-8 md:px-12 lg:px-20 xl:px-[140px]"
-          >
-            <StatIcon type={stat.icon} />
-            <span className="text-gray-300 text-sm tracking-wide font-medium whitespace-nowrap">
-              {stat.text}
-            </span>
-          </div>
+        {stats.map((stat, i) => (
+          <AnimatedStat key={stat.id} stat={stat} index={i} />
         ))}
       </div>
 
@@ -39,10 +32,24 @@ export default function SimpleSection() {
       <div
         className="h-px w-full"
         style={{
-          background:
-            "linear-gradient(90deg, transparent, rgba(249,115,22,0.6), transparent)",
+          background: "linear-gradient(90deg, transparent, rgba(249,115,22,0.6), transparent)",
         }}
       />
+    </div>
+  );
+}
+
+function AnimatedStat({ stat, index }: { stat: StatItem; index: number }) {
+  const anim = useScrollAnimation({ direction: "up", delay: index * 150, threshold: 0.1 });
+  return (
+    <div
+      ref={anim.ref}
+      className={`flex items-center gap-3 px-8 md:px-12 lg:px-20 xl:px-[140px] ${getAnimationClasses("up", anim.isVisible)}`}
+    >
+      <StatIcon type={stat.icon} />
+      <span className="text-gray-300 text-sm tracking-wide font-medium whitespace-nowrap">
+        {stat.text}
+      </span>
     </div>
   );
 }
@@ -78,7 +85,6 @@ function StatIcon({ type }: { type: IconType }) {
     );
   }
 
-  // target
   return (
     <svg {...common}>
       <circle cx="11" cy="13" r="8" />

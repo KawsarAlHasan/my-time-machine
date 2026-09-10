@@ -1,14 +1,25 @@
+"use client";
+
 import Image from "next/image";
 import PrimaryButton from "../ui/PrimaryButton";
 import SmallTitle from "../ui/SmallTitle";
 import PrimaryTitle from "../ui/PrimaryTitle";
 import SecondaryTitle from "../ui/SecondaryTitle";
+import { useScrollAnimation, getAnimationClasses } from "../ui/useScrollAnimation";
 
 export default function MakeYourFuture() {
+  const center = useScrollAnimation({ direction: "up", delay: 150, threshold: 0.15 });
+  const leftImg = useScrollAnimation({ direction: "left", delay: 0, threshold: 0.1 });
+  const rightImg = useScrollAnimation({ direction: "right", delay: 0, threshold: 0.1 });
+
   return (
     <section className="relative w-full bg-black" style={{ height: "659px" }}>
       {/* ── LEFT: sun/fire image ── */}
-      <div className="absolute inset-y-0 left-0 z-0" style={{ width: "50%" }}>
+      <div
+        ref={leftImg.ref}
+        className={`absolute inset-y-0 left-0 z-0 ${getAnimationClasses("left", leftImg.isVisible)}`}
+        style={{ width: "50%" }}
+      >
         <Image
           src="/images/left-bg.png"
           alt="Fiery sun background"
@@ -27,7 +38,11 @@ export default function MakeYourFuture() {
       </div>
 
       {/* ── RIGHT: blue planet image ── */}
-      <div className="absolute inset-y-0 right-0 z-0" style={{ width: "50%" }}>
+      <div
+        ref={rightImg.ref}
+        className={`absolute inset-y-0 right-0 z-0 ${getAnimationClasses("right", rightImg.isVisible)}`}
+        style={{ width: "50%" }}
+      >
         <Image
           src="/images/right-bg.png"
           alt="Blue planet background"
@@ -47,7 +62,10 @@ export default function MakeYourFuture() {
 
       {/* ── CENTER content ── */}
       <div className="absolute inset-0 z-10 flex items-center justify-center max-sm:px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
-        <div className="w-full rounded-[22px] border border-white/40 bg-black/20 px-6 py-10 sm:px-14 sm:py-12 text-center flex flex-col justify-center items-center">
+        <div
+          ref={center.ref}
+          className={`w-full rounded-[22px] border border-white/40 bg-black/20 px-6 py-10 sm:px-14 sm:py-12 text-center flex flex-col justify-center items-center ${getAnimationClasses("up", center.isVisible)}`}
+        >
           <div className="">
             {/* Heading */}
             <PrimaryTitle
@@ -67,11 +85,7 @@ export default function MakeYourFuture() {
 
             {/* CTA Button */}
             <div className="mt-7 sm:mt-9 flex justify-center">
-              {/* Primary */}
-              <PrimaryButton
-                htmlContent="START MY TIME JUMP"
-                isRightArrow={true}
-              />
+              <PrimaryButton htmlContent="START MY TIME JUMP" isRightArrow={true} />
             </div>
           </div>
         </div>

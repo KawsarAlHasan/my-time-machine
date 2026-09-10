@@ -13,3 +13,35 @@
 html {
   scroll-behavior: smooth;
 }
+
+body {
+  overflow-x: hidden;
+}
+
+/* ── Floating particle keyframe (subtle ambient effect) ── */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* ── Pulse glow ── */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+/* ── Slide-in shimmer on hover for buttons ── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Smooth page entrance */
+body {
+  animation: fadeInPage 0.4s ease-out both;
+}
+
+@keyframes fadeInPage {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

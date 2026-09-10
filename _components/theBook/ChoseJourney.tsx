@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import SmallTitle from "../ui/SmallTitle";
 import PrimaryTitle from "../ui/PrimaryTitle";
 import SecondaryTitle from "../ui/SecondaryTitle";
+import { useScrollAnimation, getAnimationClasses } from "../ui/useScrollAnimation";
 
 type Theme = "orange" | "blue";
 
@@ -15,6 +18,7 @@ interface BookCardProps {
   ctaText: string;
   bgImage: string;
   bookImage: string;
+  index: number;
 }
 
 const themeStyles: Record<
@@ -55,12 +59,16 @@ function BookCard({
   ctaText,
   bgImage,
   bookImage,
+  index,
 }: BookCardProps) {
   const s = themeStyles[theme];
+  const dir = index === 0 ? "left" : "right" as const;
+  const anim = useScrollAnimation({ direction: dir, delay: index * 200, threshold: 0.1 });
 
   return (
     <div
-      className={`relative flex-1 h-[536px] overflow-hidden rounded-2xl border ${s.border}`}
+      ref={anim.ref}
+      className={`relative flex-1 h-[536px] overflow-hidden rounded-2xl border ${s.border} transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.6)] ${getAnimationClasses(dir, anim.isVisible)}`}
     >
       {/* Background Image */}
       <div className="absolute inset-0">
@@ -80,7 +88,7 @@ function BookCard({
         <div className="flex w-full shrink-0 items-center justify-center sm:w-[200px] md:w-[200px]">
           <div className="[perspective:1000px]">
             <div
-              className={`relative overflow-hidden rounded-r-md rounded-l-sm [transform:rotateY(-15deg)]
+              className={`relative overflow-hidden rounded-r-md rounded-l-sm [transform:rotateY(-15deg)] transition-transform duration-500 hover:[transform:rotateY(0deg)]
                 ${
                   theme === "orange"
                     ? "shadow-[8px_8px_40px_rgba(249,115,22,0.5)]"
@@ -137,7 +145,7 @@ function BookCard({
 
           <button
             type="button"
-            className={`mt-6 inline-flex items-center gap-2 rounded-md border ${s.buttonBorder} bg-black/50 px-6 py-3 text-[11px] font-semibold uppercase tracking-widest text-white ${s.buttonGlow} transition-all duration-300 hover:bg-black/70`}
+            className={`mt-6 inline-flex items-center gap-2 rounded-md border ${s.buttonBorder} bg-black/50 px-6 py-3 text-[11px] font-semibold uppercase tracking-widest text-white ${s.buttonGlow} transition-all duration-300 hover:bg-black/70 hover:scale-105`}
           >
             {ctaText}
             <svg
@@ -161,10 +169,15 @@ function BookCard({
 }
 
 export default function ChoseJourney() {
+  const header = useScrollAnimation({ direction: "up", delay: 0, threshold: 0.1 });
+
   return (
     <div className="min-h-screen w-full bg-black px-4 py-12 max-sm:px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
       {/* Header */}
-      <div className="my-12 text-center">
+      <div
+        ref={header.ref}
+        className={`my-12 text-center ${getAnimationClasses("up", header.isVisible)}`}
+      >
         <SmallTitle children="THE SIMPLE PROCESS" classNameText="" />
         <PrimaryTitle classNameText="my-4!" children="CHOSE YOUR" />
         <SecondaryTitle classNameText="my-4!" children="JOURNEY" />
@@ -188,6 +201,7 @@ export default function ChoseJourney() {
           ctaText="Explore the book"
           bgImage="/images/bg-philosophy.png"
           bookImage="/images/philosophy.png"
+          index={0}
         />
 
         <BookCard
@@ -203,6 +217,7 @@ export default function ChoseJourney() {
           ctaText="Explore the book"
           bgImage="/images/bg-story.png"
           bookImage="/images/story.png"
+          index={1}
         />
       </div>
     </div>
