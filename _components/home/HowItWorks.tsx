@@ -4,7 +4,10 @@ import React from "react";
 import Image from "next/image";
 import PrimaryTitle from "../ui/PrimaryTitle";
 import SmallTitle from "../ui/SmallTitle";
-import { useScrollAnimation, getAnimationClasses } from "../ui/useScrollAnimation";
+import {
+  useScrollAnimation,
+  getAnimationClasses,
+} from "../ui/useScrollAnimation";
 
 const steps = [
   {
@@ -39,9 +42,19 @@ const steps = [
   },
 ];
 
-function AnimatedCard({ step, index }: { step: typeof steps[0]; index: number }) {
+function AnimatedCard({
+  step,
+  index,
+}: {
+  step: (typeof steps)[0];
+  index: number;
+}) {
   const directions = ["left", "up", "right"] as const;
-  const anim = useScrollAnimation({ direction: directions[index], delay: index * 150, threshold: 0.1 });
+  const anim = useScrollAnimation({
+    direction: directions[index],
+    delay: index * 150,
+    threshold: 0.1,
+  });
 
   return (
     <div
@@ -91,16 +104,23 @@ function AnimatedCard({ step, index }: { step: typeof steps[0]; index: number })
 }
 
 export default function HowItWorks() {
-  const header = useScrollAnimation({ direction: "up", delay: 0, threshold: 0.1 });
+  const header = useScrollAnimation({
+    direction: "up",
+    delay: 0,
+    threshold: 0.1,
+  });
 
   return (
-    <section id="how-it-works" className="w-full bg-black px-10 py-[60px] pb-20 max-sm:px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
+    <section
+      id="how-it-works"
+      className="w-full bg-black px-10 py-[60px] pb-20 max-sm:px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48"
+    >
       {/* Header */}
       <div
         ref={header.ref}
         className={`mb-12 text-center ${getAnimationClasses("up", header.isVisible)}`}
       >
-        <SmallTitle children="THE SIMPLE PROCESS" classNameText="" />
+
         <PrimaryTitle classNameText="my-4!" children="HOW IT WORKS" />
         <SmallTitle
           children="A SIMPLE PROCESS. A POWERFUL PERSPECTIVE."

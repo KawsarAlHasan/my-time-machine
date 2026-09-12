@@ -19,19 +19,19 @@ const faqItems = [
       "You answer a short series of reflective questions, and My Time Machine shows you a projected picture of where today's habits and choices could lead.",
   },
   {
-    question: "How does the Time Jump work?",
+    question: "Is my information private and secure?",
     answer:
-      "You answer a short series of reflective questions, and My Time Machine shows you a projected picture of where today's habits and choices could lead.",
+      "Absolutely. Your answers are used solely to personalize your experience. We never sell or share your data with third parties, and you can delete your profile at any time.",
   },
   {
-    question: "How does the Time Jump work?",
+    question: "How long does a Time Jump take?",
     answer:
-      "You answer a short series of reflective questions, and My Time Machine shows you a projected picture of where today's habits and choices could lead.",
+      "Most Time Jumps take about 2–5 minutes. The experience is designed to be quick, focused, and immediately actionable—no long surveys or complicated setup.",
   },
   {
-    question: "How does the Time Jump work?",
+    question: "What happens after I see my future timeline?",
     answer:
-      "You answer a short series of reflective questions, and My Time Machine shows you a projected picture of where today's habits and choices could lead.",
+      "After your Time Jump, you'll receive personalized guidance and practical next steps to help you move toward the future you want—starting today.",
   },
 ];
 

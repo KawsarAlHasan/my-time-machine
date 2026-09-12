@@ -2,7 +2,10 @@
 
 import Image from "next/image";
 import PrimaryButton from "../ui/PrimaryButton";
-import { useScrollAnimation, getAnimationClasses } from "../ui/useScrollAnimation";
+import {
+  useScrollAnimation,
+  getAnimationClasses,
+} from "../ui/useScrollAnimation";
 
 export default function Hero() {
   const left = useScrollAnimation({ direction: "left", delay: 100 });
@@ -99,13 +102,17 @@ export default function Hero() {
           <div className="mt-5 sm:mt-6 max-w-[340px]">
             <p
               className="text-[14px] leading-relaxed text-gray-300"
-              style={{ fontFamily: "var(--font-general-sans), 'Inter', sans-serif" }}
+              style={{
+                fontFamily: "var(--font-general-sans), 'Inter', sans-serif",
+              }}
             >
               One explains the philosophy.
             </p>
             <p
               className="text-[14px] leading-relaxed text-gray-300"
-              style={{ fontFamily: "var(--font-general-sans), 'Inter', sans-serif" }}
+              style={{
+                fontFamily: "var(--font-general-sans), 'Inter', sans-serif",
+              }}
             >
               One takes you on the adventure.
             </p>
@@ -121,20 +128,43 @@ export default function Hero() {
         <div className="relative hidden lg:flex items-center justify-center h-full">
           <div
             ref={right.ref}
-            className={`relative ${getAnimationClasses("right", right.isVisible)}`}
-            style={{ width: "min(850px, 50vw)", height: "min(850px, 50vw)" }}
+            className={`relative flex items-end justify-center gap-8 ${getAnimationClasses("right", right.isVisible)}`}
           >
-            <Image
-              src="/images/book.png"
-              alt="Back From The Future book covers"
-              fill
-              sizes="(max-width: 1280px) 45vw, 820px"
-              className="object-contain object-center"
-              style={{
-                filter:
-                  "drop-shadow(0 30px 70px rgba(0,0,0,0.85)) drop-shadow(0 0 40px rgba(23,66,239,0.25))",
-              }}
-            />
+            {/* Back From the Future — left book */}
+            <div className="relative shrink-0 w-full h-[500px]">
+              <Image
+                src="/images/philosophy.png"
+                alt="Back From the Future book cover"
+                fill
+                // sizes="220px"
+                // className="object-cover object-center"
+              />
+
+              <p className="mt-3 text-center text-[11px] font-semibold uppercase tracking-widest text-orange-400">
+                Back From the Future
+              </p>
+            </div>
+
+            {/* My Time Machine — right book */}
+            <div
+              className="relative shrink-0 w-full h-[500px]"
+              // style={{
+              //   width: 220,
+              //   height: 340,
+              // }}
+            >
+              <Image
+                src="/images/story.png"
+                alt="My Time Machine book cover"
+                fill
+                // sizes="220px"
+                // className="object-cover object-center"
+              />
+              {/* Label below */}
+              <p className="mt-3 text-center text-[11px] font-semibold uppercase tracking-widest text-blue-400">
+                My Time Machine
+              </p>
+            </div>
           </div>
         </div>
       </div>

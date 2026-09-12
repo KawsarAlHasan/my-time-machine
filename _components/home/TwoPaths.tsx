@@ -36,26 +36,30 @@ const paths: PathData[] = [
     id: "future-to-avoid",
     image: "/images/path-2.png",
     label: "The Future You Want to Avoid",
-    title: "A life that feels like yours.",
-    featuresLeft: ["More freedom", "Greater success", "A healthier, stronger you"],
-    featuresRight: ["Deeper relationships", "A life you're proud of"],
+    title: "Do not let default decide.",
+    featuresLeft: ["Missed opportunities", "Ongoing stress", "What could have been"],
+    featuresRight: ["Regret", "A smaller version of you"],
     buttonText: "Stay Aware",
     accent: "blue",
   },
 ];
 
-const accentStyles: Record<Accent, { text: string; border: string; glow: string; check: string }> = {
+const accentStyles: Record<Accent, { text: string; border: string; cardBorder: string; glow: string; check: string; checkIcon: string }> = {
   orange: {
     text: "text-orange-400",
     border: "border-orange-500/70",
+    cardBorder: "border-orange-500/40",
     glow: "0 0 18px rgba(249,115,22,0.55), inset 0 0 12px rgba(249,115,22,0.08)",
     check: "text-green-400",
+    checkIcon: "&#10003;",
   },
   blue: {
     text: "text-blue-400",
     border: "border-blue-500/70",
+    cardBorder: "border-blue-500/40",
     glow: "0 0 18px rgba(59,130,246,0.55), inset 0 0 12px rgba(59,130,246,0.08)",
     check: "text-green-400",
+    checkIcon: "&#10003;",
   },
 };
 
@@ -92,11 +96,10 @@ function PathCard({ path, index }: { path: PathData; index: number }) {
   return (
     <div
       ref={anim.ref}
-      className={`rounded-2xl overflow-hidden border bg-black flex flex-col transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] ${getAnimationClasses(dir, anim.isVisible)}`}
-      style={{ borderColor: "rgba(255,255,255,0.08)" }}
+      className={`relative rounded-[32px] overflow-hidden border ${accent.cardBorder} flex flex-col transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] min-h-[500px] sm:min-h-[550px] ${getAnimationClasses(dir, anim.isVisible)}`}
     >
-      {/* Image */}
-      <div className="relative h-72 sm:h-80 w-full bg-gray-900 overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 w-full h-full bg-gray-900 overflow-hidden">
         {path.image ? (
           <img
             src={path.image}
@@ -108,45 +111,47 @@ function PathCard({ path, index }: { path: PathData; index: number }) {
             Image placeholder
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
       </div>
 
       {/* Content */}
-      <div className="px-6 pt-4 pb-6 flex-1 flex flex-col">
-        <p className="text-gray-300 text-sm mb-2">{path.label}</p>
-        <h3 className="text-white text-2xl font-mono font-medium mb-4">{path.title}</h3>
+      <div className="relative px-6 sm:px-8 pt-4 pb-6 sm:pb-8 flex-1 flex flex-col justify-end z-10">
+        <div className="mt-auto">
+          <p className="text-gray-300 text-sm mb-1">{path.label}</p>
+          <h3 className="text-white text-2xl sm:text-3xl font-mono font-medium mb-6">{path.title}</h3>
 
-        <div className="grid grid-cols-2 gap-x-6 gap-y-2 mb-6">
-          <ul className="space-y-2">
-            {path.featuresLeft.map((item) => (
-              <FeatureItem key={item} text={item} checkClass={accent.check} />
-            ))}
-          </ul>
-          <ul className="space-y-2">
-            {path.featuresRight.map((item) => (
-              <FeatureItem key={item} text={item} checkClass={accent.check} />
-            ))}
-          </ul>
+          <div className="grid grid-cols-2 gap-x-2 sm:gap-x-4 gap-y-2 mb-8">
+            <ul className="space-y-2">
+              {path.featuresLeft.map((item) => (
+                <FeatureItem key={item} text={item} checkClass={accent.check} checkIcon={accent.checkIcon} />
+              ))}
+            </ul>
+            <ul className="space-y-2">
+              {path.featuresRight.map((item) => (
+                <FeatureItem key={item} text={item} checkClass={accent.check} checkIcon={accent.checkIcon} />
+              ))}
+            </ul>
+          </div>
+
+          {/* Button */}
+          <button
+            type="button"
+            className={`w-full rounded-lg border ${accent.border} bg-black/60 text-white text-sm tracking-wide font-medium py-3 sm:py-4 flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] hover:bg-white/5`}
+            style={{ boxShadow: accent.glow }}
+          >
+            {path.buttonText.toUpperCase()}
+            <span aria-hidden="true">&rarr;</span>
+          </button>
         </div>
-
-        {/* Button */}
-        <button
-          type="button"
-          className={`mt-auto w-full rounded-lg border ${accent.border} bg-black/60 text-white text-sm tracking-wide font-medium py-3 flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] hover:bg-white/5`}
-          style={{ boxShadow: accent.glow }}
-        >
-          {path.buttonText.toUpperCase()}
-          <span aria-hidden="true">&rarr;</span>
-        </button>
       </div>
     </div>
   );
 }
 
-function FeatureItem({ text, checkClass }: { text: string; checkClass: string }) {
+function FeatureItem({ text, checkClass, checkIcon }: { text: string; checkClass: string; checkIcon: string }) {
   return (
     <li className="flex items-center gap-2 text-gray-200 text-[15px]">
-      <span className={`${checkClass} text-sm`}>&#10003;</span>
+      <span className={`${checkClass} text-sm font-bold`} dangerouslySetInnerHTML={{ __html: checkIcon }} />
       {text}
     </li>
   );

@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import SmallTitle from "../ui/SmallTitle";
 import PrimaryTitle from "../ui/PrimaryTitle";
 import SecondaryTitle from "../ui/SecondaryTitle";
 import { useScrollAnimation, getAnimationClasses } from "../ui/useScrollAnimation";
@@ -68,10 +67,10 @@ function BookCard({
   return (
     <div
       ref={anim.ref}
-      className={`relative flex-1 h-[536px] overflow-hidden rounded-2xl border ${s.border} transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.6)] ${getAnimationClasses(dir, anim.isVisible)}`}
+      className={`relative flex-1 min-h-[480px] overflow-visible rounded-2xl transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.6)] ${getAnimationClasses(dir, anim.isVisible)}`}
     >
       {/* Background Image */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden rounded-2xl">
         <Image
           src={bgImage}
           alt=""
@@ -82,10 +81,13 @@ function BookCard({
         {/* Dark overlay for readability */}
         <div className="absolute inset-0 bg-black/70" />
       </div>
+
+      {/* Border overlay */}
+      <div className={`pointer-events-none absolute inset-0 rounded-2xl border ${s.border}`} />
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col items-center gap-6 p-6 sm:flex-row sm:items-center sm:p-8">
         {/* Left: Book Cover Image */}
-        <div className="flex w-full shrink-0 items-center justify-center sm:w-[200px] md:w-[200px]">
+        <div className="flex w-full shrink-0 items-center justify-center sm:w-[180px] md:w-[180px]">
           <div className="[perspective:1000px]">
             <div
               className={`relative overflow-hidden rounded-r-md rounded-l-sm [transform:rotateY(-15deg)] transition-transform duration-500 hover:[transform:rotateY(0deg)]
@@ -95,7 +97,7 @@ function BookCard({
                     : "shadow-[8px_8px_40px_rgba(59,130,246,0.5)]"
                 }
               `}
-              style={{ width: 175, height: 290 }}
+              style={{ width: 155, height: 260 }}
             >
               <Image
                 src={bookImage}
@@ -115,21 +117,21 @@ function BookCard({
         {/* Right: Text Content */}
         <div className="w-full text-left">
           <p
-            className={`text-[11px] font-semibold uppercase tracking-[0.22em] ${s.eyebrowColor}`}
+            className={`text-[10px] font-semibold uppercase tracking-[0.2em] ${s.eyebrowColor}`}
           >
             {eyebrow}
           </p>
-          <h2 className="mt-1 text-[2rem] font-black uppercase leading-[1.1] tracking-wide text-white sm:text-[2.2rem] md:text-[2.6rem]">
+          <h2 className="mt-1 text-[1.6rem] font-black uppercase leading-[1.1] tracking-wide text-white sm:text-[1.8rem] md:text-[2rem] lg:text-[2.2rem]">
             {title}
           </h2>
-          <p className="mt-4 text-[13px] font-bold uppercase leading-snug tracking-wide text-white">
+          <p className="mt-3 text-[12px] font-bold uppercase leading-snug tracking-wide text-white">
             {subheading}
           </p>
 
           {paragraphs.map((p, i) => (
             <p
               key={i}
-              className="mt-3 text-[13px] leading-relaxed text-white/65"
+              className="mt-2 text-[12px] leading-relaxed text-white/65"
             >
               {p}
             </p>
@@ -137,7 +139,7 @@ function BookCard({
 
           {quote && (
             <p
-              className={`mt-4 text-[14px] font-black uppercase tracking-wide ${s.quoteText}`}
+              className={`mt-3 text-[13px] font-black uppercase tracking-wide ${s.quoteText}`}
             >
               {quote}
             </p>
@@ -145,7 +147,7 @@ function BookCard({
 
           <button
             type="button"
-            className={`mt-6 inline-flex items-center gap-2 rounded-md border ${s.buttonBorder} bg-black/50 px-6 py-3 text-[11px] font-semibold uppercase tracking-widest text-white ${s.buttonGlow} transition-all duration-300 hover:bg-black/70 hover:scale-105`}
+            className={`mt-5 inline-flex items-center gap-2 rounded-md border ${s.buttonBorder} bg-black/50 px-5 py-2.5 text-[10px] font-semibold uppercase tracking-widest text-white ${s.buttonGlow} transition-all duration-300 hover:bg-black/70 hover:scale-105`}
           >
             {ctaText}
             <svg
@@ -178,8 +180,7 @@ export default function ChoseJourney() {
         ref={header.ref}
         className={`my-12 text-center ${getAnimationClasses("up", header.isVisible)}`}
       >
-        <SmallTitle children="THE SIMPLE PROCESS" classNameText="" />
-        <PrimaryTitle classNameText="my-4!" children="CHOSE YOUR" />
+        <PrimaryTitle classNameText="my-4!" children="CHOOSE YOUR" />
         <SecondaryTitle classNameText="my-4!" children="JOURNEY" />
         <p className="mx-auto mt-8 max-w-[470px] text-[20px] text-[#FFFFFF]">
           Two books. Two different paths. the same machine. Your choice
@@ -190,14 +191,13 @@ export default function ChoseJourney() {
       <div className="mx-auto flex flex-col gap-6 lg:flex-row">
         <BookCard
           theme="orange"
-          eyebrow="Back From the Future -"
+          eyebrow="Back From the Future —"
           title="The Philosophy"
-          subheading="How small daily decisions create radically different timelines"
+          subheading="Where is your timeline heading?"
           paragraphs={[
             "What if you could see where your current choices are taking you before you get there?",
             "Back From the Future explores the idea behind My Time Machine: make your future vivid enough to change what you do today.",
           ]}
-          quote="See the future you are creating"
           ctaText="Explore the book"
           bgImage="/images/bg-philosophy.png"
           bookImage="/images/philosophy.png"
@@ -206,14 +206,13 @@ export default function ChoseJourney() {
 
         <BookCard
           theme="blue"
-          eyebrow="My Time Machine"
+          eyebrow="My Time Machine —"
           title="The Story"
-          subheading="How small daily decisions create radically different timelines"
+          subheading="Meet the person you&apos;re becoming."
           paragraphs={[
-            "A time-travel buddy adventure with your future self .!",
+            "A time-travel buddy adventure with your future self.",
             "My Time Machine turns the philosophy into a cinematic time-travel adventure, discovering how seemingly small choices can change everything.",
           ]}
-          quote="Meet the person you are becoming."
           ctaText="Explore the book"
           bgImage="/images/bg-story.png"
           bookImage="/images/story.png"
