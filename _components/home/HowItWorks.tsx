@@ -22,7 +22,7 @@ const steps = [
   },
   {
     number: "02",
-    image: "/images/how-2.png",
+    image: "/images/new.png",
     title: "See Your Timeline",
     description: [
       "Get a personalized glimpse",
