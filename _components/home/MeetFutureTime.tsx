@@ -94,13 +94,13 @@ export default function MeetFutureTime() {
         {/* Left: Newspaper image card */}
         <div
           ref={leftCol.ref}
-          className={`flex items-center justify-center rounded-2xl border border-[#3a2e1f] bg-black p-10 h-full w-full col-span-4 ${getAnimationClasses("left", leftCol.isVisible)}`}
+          className={`flex items-center justify-center rounded-2xl border border-[#3a2e1f] bg-black p-10 h-full w-full lg:col-span-4 ${getAnimationClasses("left", leftCol.isVisible)}`}
         >
           <div className="relative inline-block">
             <img
               src="/images/MeetFutureTime.png"
               alt="Future Times newspaper front page"
-              className="relative rounded-sm shadow-2xl hover:scale-105 transition-transform duration-500"
+              className="relative rounded-sm shadow-2xl hover:scale-105 transition-transform duration-500 h-full w-[400px]"
             />
             {/* Prominent newspaper headline overlay */}
             {/* <div className="absolute top-[18%] left-[6%] right-[6%] text-center pointer-events-none">
@@ -123,7 +123,7 @@ export default function MeetFutureTime() {
         {/* Right: Copy + features */}
         <div
           ref={rightCol.ref}
-          className={`col-span-5 ${getAnimationClasses("right", rightCol.isVisible)}`}
+          className={`lg:col-span-5 ${getAnimationClasses("right", rightCol.isVisible)}`}
         >
           <SmallTitle
             children="FUTURE TIMES"

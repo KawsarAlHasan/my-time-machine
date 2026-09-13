@@ -5,54 +5,72 @@ import { HiChevronDown, HiChevronUp } from "react-icons/hi2";
 import PrimaryTitle from "../ui/PrimaryTitle";
 import SecondaryTitle from "../ui/SecondaryTitle";
 import SmallTitle from "../ui/SmallTitle";
-import { useScrollAnimation, getAnimationClasses } from "../ui/useScrollAnimation";
+import {
+  useScrollAnimation,
+  getAnimationClasses,
+} from "../ui/useScrollAnimation";
 
 const faqItems = [
   {
     question: "What is My Time Machine?",
     answer:
-      "My Time Machine is a guided reflection experience that helps you see where your current choices may be leading—so you can make better decisions today.",
+      "My Time Machine is an AI-powered guided reflection experience that helps you explore where your current choices may lead—and what you can do today to shape a different future. Through personalized stories, your Future Times newspaper, and conversations with Future You, it makes your goals easier to picture and act on",
   },
   {
     question: "How does the Time Jump work?",
     answer:
-      "You answer a short series of reflective questions, and My Time Machine shows you a projected picture of where today's habits and choices could lead.",
-  },
-  {
-    question: "Is my information private and secure?",
-    answer:
-      "Absolutely. Your answers are used solely to personalize your experience. We never sell or share your data with third parties, and you can delete your profile at any time.",
+      "Start by choosing how far ahead you want to look and answering five short questions about your goals, habits, and what might be holding you back. Your answers help create a personalized Future Times newspaper showing one possible future, along with a practical next step. It’s an imagined possibility based on your answers, not a prediction or guarantee.",
   },
   {
     question: "How long does a Time Jump take?",
     answer:
-      "Most Time Jumps take about 2–5 minutes. The experience is designed to be quick, focused, and immediately actionable—no long surveys or complicated setup.",
+      "The Quick Time Jump is designed to take about two minutes. If you want to explore more deeply, the Full Scan takes approximately ten minutes and looks at both the future you want and the future you want to avoid. Take your time—thoughtful answers make the experience more personal.",
   },
   {
-    question: "What happens after I see my future timeline?",
+    question: "What happens after my Time Jump?",
     answer:
-      "After your Time Jump, you'll receive personalized guidance and practical next steps to help you move toward the future you want—starting today.",
+      "Your first jump starts the conversation. Continue with Future You to explore your questions, identify next steps, and reflect on your progress. Daily check-ins and your Time Vault help you keep track of the actions you take, while updated Future Times editions help you see how your direction is changing.",
+  },
+  {
+    question: "Can I change the future I see?",
+    answer:
+      "Yes—that’s the purpose of the experience. Your Future Times illustrates a possible direction based on what you’ve shared. As your choices, habits, and circumstances change, your possible futures can change too. My Time Machine helps you identify steps toward the life you want to build.",
   },
 ];
 
 export default function Faq() {
   const [openIndex, setOpenIndex] = useState(0);
-  const leftCol = useScrollAnimation({ direction: "left", delay: 100, threshold: 0.1 });
-  const rightCol = useScrollAnimation({ direction: "right", delay: 200, threshold: 0.1 });
+  const leftCol = useScrollAnimation({
+    direction: "left",
+    delay: 100,
+    threshold: 0.1,
+  });
+  const rightCol = useScrollAnimation({
+    direction: "right",
+    delay: 200,
+    threshold: 0.1,
+  });
 
   const toggleItem = (index: number) => {
     setOpenIndex((prev) => (prev === index ? -1 : index));
   };
 
   return (
-    <section id="contact" className="w-full bg-black px-4 py-16 sm:px-8 sm:py-24 md:px-12 lg:px-20 xl:px-48">
+    <section
+      id="contact"
+      className="w-full bg-black px-4 py-16 sm:px-8 sm:py-24 md:px-12 lg:px-20 xl:px-48"
+    >
       <div className="mx-auto grid grid-cols-1 lg:grid-cols-11 gap-12">
         {/* Left column */}
         <div
           ref={leftCol.ref}
           className={`lg:col-span-6 ${getAnimationClasses("left", leftCol.isVisible)}`}
         >
-          <SmallTitle children="Before your first jump" classNameText="" fontSize="16px" />
+          <SmallTitle
+            children="Before your first jump"
+            classNameText=""
+            fontSize="16px"
+          />
 
           <PrimaryTitle classNameText="my-4!" children="Questions before" />
           <SecondaryTitle classNameText="my-4!" children="your first jump?" />
