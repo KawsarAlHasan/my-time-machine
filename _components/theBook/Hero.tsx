@@ -125,12 +125,30 @@ export default function Hero() {
         </div>
 
         {/* ── RIGHT: book covers (desktop only) ── */}
-        <div className="relative hidden lg:flex items-center justify-center h-full">
+        <div className="relative hidden lg:flex items-center justify-end h-full">
+          <div
+            ref={right.ref}
+            className={`relative w-full max-w-[700px] aspect-square ${getAnimationClasses("right", right.isVisible)}`}
+            style={{
+              // marginRight: "-50px",
+              marginBottom: "50px",
+            }}
+          >
+            <Image
+              src="/images/Two-Books-Transparent-Hero.png"
+              alt="My Time Machine app preview on a phone screen"
+              fill
+              className="object-contain object-bottom"
+              style={{ filter: "drop-shadow(0 40px 80px rgba(0,0,0,0.9))" }}
+            />
+          </div>
+        </div>
+
+        {/* <div className="relative hidden lg:flex items-center justify-center h-full">
           <div
             ref={right.ref}
             className={`relative flex items-end justify-center gap-8 ${getAnimationClasses("right", right.isVisible)}`}
           >
-            {/* Back From the Future — left book */}
             <div className="relative shrink-0 w-full h-[500px]">
               <Image
                 src="/images/philosophy.png"
@@ -145,7 +163,6 @@ export default function Hero() {
               </p>
             </div>
 
-            {/* My Time Machine — right book */}
             <div
               className="relative shrink-0 w-full h-[500px]"
               // style={{
@@ -160,13 +177,12 @@ export default function Hero() {
                 // sizes="220px"
                 // className="object-cover object-center"
               />
-              {/* Label below */}
               <p className="mt-3 text-center text-[11px] font-semibold uppercase tracking-widest text-blue-400">
                 My Time Machine
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
