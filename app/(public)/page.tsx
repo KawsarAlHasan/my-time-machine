@@ -12,7 +12,7 @@ import VideoExplainer from "@/_components/home/VideoExplainer";
 
 export default function HomePage() {
   return (
-    <div className="bg-black">
+    <div className="overflow-x-hidden bg-black">
       <Hero />
       <SimpleSection />
       <HowItWorks />

@@ -71,7 +71,7 @@ export default function DifferentJourneys() {
   const header = useScrollAnimation({ direction: "up", delay: 0, threshold: 0.1 });
 
   return (
-    <div className="w-full bg-black py-16 max-sm:px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
+    <div className="w-full overflow-x-hidden bg-black py-16 max-sm:px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
       {/* Heading */}
       <div
         ref={header.ref}

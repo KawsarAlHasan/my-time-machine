@@ -13,11 +13,11 @@ export default function Hero() {
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-black"
+      className="relative w-full overflow-hidden bg-black flex flex-col"
       style={{ minHeight: "calc(100vh - 72px)" }}
     >
-      {/* Full-bleed background image */}
-      <div className="absolute inset-0 z-0">
+      {/* Full-bleed background image - Desktop */}
+      <div className="absolute inset-0 z-0 1hidden md:1block">
         <Image
           src="/images/book-hero.png"
           alt="Futuristic cityscape with glowing timelines"
@@ -29,23 +29,35 @@ export default function Hero() {
         />
       </div>
 
-      {/* Content grid */}
+      {/* Full-bleed background image - Mobile */}
+      {/* <div className="absolute inset-0 z-0 1block md:1hidden">
+        <Image
+          src="/images/phone-book-hero.png"
+          alt="Futuristic cityscape with glowing timelines"
+          fill
+          priority
+          loading="eager"
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+      </div> */}
+
+      {/* Content wrapper */}
       <div
-        className="relative z-10 mx-auto grid grid-cols-1 items-center px-4 sm:px-8 md:px-12 lg:grid-cols-2 lg:px-20 xl:px-48"
+        className="relative z-10 mx-auto w-full flex flex-col lg:grid lg:grid-cols-2 items-center px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48"
         style={{ minHeight: "calc(100vh - 72px)" }}
       >
         {/* ── LEFT: copy ── */}
         <div
           ref={left.ref}
-          className={`flex flex-col justify-center py-16 sm:py-20 lg:py-0 ${getAnimationClasses("left", left.isVisible)}`}
+          className={`w-full flex flex-col justify-center items-center lg:items-start text-center lg:text-left pt-[10vh] pb-4 lg:pt-0 lg:pb-0 ${getAnimationClasses("left", left.isVisible)}`}
         >
           {/* Line 1: TWO BOOKS. */}
           <h1
-            className="block!"
+            className="block! text-[28px] sm:text-[46px] md:text-[60px] lg:text-[70px] xl:text-[90px]"
             style={{
               fontFamily: "var(--font-hyperspace), 'Arial Black', sans-serif",
               fontWeight: 200,
-              fontSize: "clamp(2.2rem, 8vw, 90px)",
               lineHeight: 1,
               letterSpacing: "0em",
               color: "#FFFFFF",
@@ -60,13 +72,12 @@ export default function Hero() {
             TWO BOOKS.
           </h1>
 
-          {/* Line 2: ONE TIME */}
+          {/* Line 2: ONE TIME MACHINE. */}
           <h1
-            className="my-3 uppercase"
+            className="mt-2 mb-3 uppercase text-[28px] sm:text-[36px] md:text-[48px] lg:text-[60px] xl:text-[80px]"
             style={{
               fontFamily: "var(--font-hyperspace), 'Arial Black', sans-serif",
               fontWeight: 200,
-              fontSize: "clamp(2.2rem, 8vw, 90px)",
               lineHeight: 1,
               letterSpacing: "0em",
               color: "#FFFFFF",
@@ -76,32 +87,13 @@ export default function Hero() {
         `,
             }}
           >
-            One Time
-          </h1>
-
-          {/* Line 3: MACHINE */}
-          <h1
-            className="uppercase"
-            style={{
-              fontFamily: "var(--font-hyperspace), 'Arial Black', sans-serif",
-              fontWeight: 200,
-              fontSize: "clamp(2.2rem, 8vw, 90px)",
-              lineHeight: 1,
-              letterSpacing: "0em",
-              color: "#FFFFFF",
-              filter: `
-          drop-shadow(2px 2px 16px rgba(236,126,28,0.5))
-          drop-shadow(-2px -2px 16px rgba(236,126,28,0.5))
-        `,
-            }}
-          >
-            MACHINE
+            ONE TIME MACHINE.
           </h1>
 
           {/* Body copy */}
-          <div className="mt-5 sm:mt-6 max-w-[340px]">
+          <div className="mt-3 sm:mt-5 w-full max-w-[340px] lg:max-w-none">
             <p
-              className="text-[14px] leading-relaxed text-gray-300"
+              className="text-[15px] md:text-[18px] leading-relaxed text-gray-100"
               style={{
                 fontFamily: "var(--font-general-sans), 'Inter', sans-serif",
               }}
@@ -109,7 +101,7 @@ export default function Hero() {
               One explains the philosophy.
             </p>
             <p
-              className="text-[14px] leading-relaxed text-gray-300"
+              className="text-[15px] md:text-[18px] leading-relaxed text-gray-100"
               style={{
                 fontFamily: "var(--font-general-sans), 'Inter', sans-serif",
               }}
@@ -118,21 +110,20 @@ export default function Hero() {
             </p>
           </div>
 
-          {/* CTA button */}
-          <div className="mt-7 sm:mt-8">
-            <PrimaryButton htmlContent="EXPLORE THE BOOK" isRightArrow={true} />
+          {/* CTA button (Desktop) */}
+          <div className="mt-8 hidden lg:block">
+            <PrimaryButton
+              htmlContent="EXPLORE THE BOOKS"
+              isRightArrow={true}
+            />
           </div>
         </div>
 
-        {/* ── RIGHT: book covers (desktop only) ── */}
-        <div className="relative hidden lg:flex items-center justify-end h-full">
+        {/* ── RIGHT: book covers ── */}
+        <div className="w-full flex-1 flex flex-col items-center justify-center lg:justify-end pb-8 lg:pb-0 relative -mt-24 min-[425px]:-mt-20 sm:mt-0">
           <div
             ref={right.ref}
-            className={`relative w-full max-w-[700px] aspect-square ${getAnimationClasses("right", right.isVisible)}`}
-            style={{
-              // marginRight: "-50px",
-              marginBottom: "50px",
-            }}
+            className={`relative w-full h-[45vh] min-h-[220px] min-[425px]:min-h-[300px] lg:h-auto lg:aspect-square max-w-[500px] lg:max-w-[700px] mb-6 lg:mb-10 ${getAnimationClasses("right", right.isVisible)}`}
           >
             <Image
               src="/images/Two-Books-Transparent-Hero.png"
@@ -142,47 +133,15 @@ export default function Hero() {
               style={{ filter: "drop-shadow(0 40px 80px rgba(0,0,0,0.9))" }}
             />
           </div>
-        </div>
 
-        {/* <div className="relative hidden lg:flex items-center justify-center h-full">
-          <div
-            ref={right.ref}
-            className={`relative flex items-end justify-center gap-8 ${getAnimationClasses("right", right.isVisible)}`}
-          >
-            <div className="relative shrink-0 w-full h-[500px]">
-              <Image
-                src="/images/philosophy.png"
-                alt="Back From the Future book cover"
-                fill
-                // sizes="220px"
-                // className="object-cover object-center"
-              />
-
-              <p className="mt-3 text-center text-[11px] font-semibold uppercase tracking-widest text-orange-400">
-                Back From the Future
-              </p>
-            </div>
-
-            <div
-              className="relative shrink-0 w-full h-[500px]"
-              // style={{
-              //   width: 220,
-              //   height: 340,
-              // }}
-            >
-              <Image
-                src="/images/story.png"
-                alt="My Time Machine book cover"
-                fill
-                // sizes="220px"
-                // className="object-cover object-center"
-              />
-              <p className="mt-3 text-center text-[11px] font-semibold uppercase tracking-widest text-blue-400">
-                My Time Machine
-              </p>
-            </div>
+          {/* CTA button (Mobile) */}
+          <div className="flex lg:hidden w-full justify-center">
+            <PrimaryButton
+              htmlContent="EXPLORE THE BOOKS"
+              isRightArrow={true}
+            />
           </div>
-        </div> */}
+        </div>
       </div>
     </section>
   );

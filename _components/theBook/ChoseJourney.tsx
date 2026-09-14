@@ -174,7 +174,7 @@ export default function ChoseJourney() {
   const header = useScrollAnimation({ direction: "up", delay: 0, threshold: 0.1 });
 
   return (
-    <div className="min-h-screen w-full bg-black px-4 py-12 max-sm:px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
+    <div className="min-h-screen w-full overflow-x-hidden bg-black px-4 py-12 max-sm:px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
       {/* Header */}
       <div
         ref={header.ref}

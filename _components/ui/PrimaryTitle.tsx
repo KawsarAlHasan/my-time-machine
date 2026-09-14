@@ -25,13 +25,19 @@ export default function PrimaryTitle({
 }: PrimaryTitleProps) {
   return (
     <h1
-      className={`${classNameText}`}
+      className={`text-[24px]
+        sm:text-[30px]
+        md:text-[38px]
+        lg:text-[46px]
+        xl:text-[56px]
+        leading-none
+        font-extralight
+        tracking-normal ${classNameText}`}
       style={{
         fontFamily: "var(--font-hyperspace), 'Arial Black', sans-serif",
-        fontWeight: 200,
-        fontSize: "clamp(2rem, 5vw, 56px)",
-        lineHeight: 1,
-        letterSpacing: "0em",
+        // fontSize: "clamp(2rem, 5vw, 56px)",
+        // lineHeight: 1,
+        // letterSpacing: "0em",
         color: "#FFFFFF",
         filter: `
                 drop-shadow(0px 0px 8px rgba(23,66,239,0.8))
