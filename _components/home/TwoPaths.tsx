@@ -15,10 +15,13 @@ interface PathData {
   image: string;
   label: string;
   title: string;
-  featuresLeft: string[];
-  featuresRight: string[];
   buttonText: string;
   accent: Accent;
+  featuresLeft?: string[];
+  featuresRight?: string[];
+  description?: string | React.ReactNode;
+  features?: string[];
+  footerText?: string;
 }
 
 const paths: PathData[] = [
@@ -36,10 +39,20 @@ const paths: PathData[] = [
     id: "future-to-avoid",
     image: "/images/path-2.png",
     label: "The Future You Want to Avoid",
-    title: "Do not let default decide.",
-    featuresLeft: ["Missed opportunities", "Ongoing stress", "What could have been"],
-    featuresRight: ["Regret", "A smaller version of you"],
-    buttonText: "Stay Aware",
+    title: "What if nothing changes?",
+    description: (
+      <>
+        Imagine looking back years from now<br />
+        and wishing you had started today.
+      </>
+    ),
+    features: [
+      "Dreams still on hold.",
+      "The same frustrations.",
+      "Another year saying \"someday.\"",
+    ],
+    footerText: "Your next choice can start a different story.",
+    buttonText: "START MY TIME JUMP",
     accent: "blue",
   },
 ];
@@ -120,18 +133,40 @@ function PathCard({ path, index }: { path: PathData; index: number }) {
           <p className="text-gray-300 text-sm mb-1">{path.label}</p>
           <h3 className="text-white text-2xl sm:text-3xl font-mono font-medium mb-6">{path.title}</h3>
 
-          <div className="grid grid-cols-2 gap-x-2 sm:gap-x-4 gap-y-2 mb-8">
-            <ul className="space-y-2">
-              {path.featuresLeft.map((item) => (
-                <FeatureItem key={item} text={item} checkClass={accent.check} checkIcon={accent.checkIcon} />
+          {path.description && (
+            <div className="text-gray-200 text-[15px] mb-4 leading-snug">
+              {path.description}
+            </div>
+          )}
+
+          {path.featuresLeft && path.featuresRight && (
+            <div className="grid grid-cols-2 gap-x-2 sm:gap-x-4 gap-y-2 mb-8">
+              <ul className="space-y-2">
+                {path.featuresLeft.map((item) => (
+                  <FeatureItem key={item} text={item} checkClass={accent.check} checkIcon={accent.checkIcon} />
+                ))}
+              </ul>
+              <ul className="space-y-2">
+                {path.featuresRight.map((item) => (
+                  <FeatureItem key={item} text={item} checkClass={accent.check} checkIcon={accent.checkIcon} />
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {path.features && (
+            <ul className="list-disc pl-5 space-y-1.5 mb-4 text-gray-200 text-[15px] marker:text-gray-400">
+              {path.features.map((item) => (
+                <li key={item}>{item}</li>
               ))}
             </ul>
-            <ul className="space-y-2">
-              {path.featuresRight.map((item) => (
-                <FeatureItem key={item} text={item} checkClass={accent.check} checkIcon={accent.checkIcon} />
-              ))}
-            </ul>
-          </div>
+          )}
+
+          {path.footerText && (
+            <div className="text-gray-200 text-[15px] mb-8">
+              {path.footerText}
+            </div>
+          )}
 
           {/* Button */}
           <button
