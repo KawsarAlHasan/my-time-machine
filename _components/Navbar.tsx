@@ -6,6 +6,8 @@ import { usePathname, useRouter } from "next/navigation";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import PrimaryButton from "./ui/PrimaryButton";
 
+// testing
+
 // ── Nav link definitions ─────────────────────────────────────────────────────
 type NavLink =
   | { label: string; type: "hash"; hash: string }
@@ -48,7 +50,9 @@ export default function Navbar() {
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileOpen]);
 
   // ── Scroll shadow ──────────────────────────────────────────────────────────
@@ -75,11 +79,17 @@ export default function Navbar() {
         let topId = "";
         let topRatio = 0;
         sectionMap.forEach((ratio, id) => {
-          if (ratio > topRatio) { topRatio = ratio; topId = id; }
+          if (ratio > topRatio) {
+            topRatio = ratio;
+            topId = id;
+          }
         });
         if (topId) setActiveHash(topId);
       },
-      { rootMargin: "-80px 0px -40% 0px", threshold: [0, 0.1, 0.3, 0.5, 0.7, 1.0] }
+      {
+        rootMargin: "-80px 0px -40% 0px",
+        threshold: [0, 0.1, 0.3, 0.5, 0.7, 1.0],
+      },
     );
 
     SECTION_IDS.forEach((id) => {
@@ -93,7 +103,9 @@ export default function Navbar() {
   const getActiveLabel = (): string => {
     if (isTheBookPage) return "THE BOOK";
     if (isHomePage) {
-      const found = navLinks.find((l) => l.type === "hash" && l.hash === activeHash);
+      const found = navLinks.find(
+        (l) => l.type === "hash" && l.hash === activeHash,
+      );
       return found?.label ?? "";
     }
     return "";
@@ -118,14 +130,16 @@ export default function Navbar() {
         router.push(`/#${hash}`);
       }
     },
-    [isHomePage, router]
+    [isHomePage, router],
   );
 
   useEffect(() => {
     if (!isHomePage) return;
     const hash = window.location.hash.replace("#", "");
     if (!hash) return;
-    const timer = setTimeout(() => { smoothScrollToHash(hash); }, 120);
+    const timer = setTimeout(() => {
+      smoothScrollToHash(hash);
+    }, 120);
     return () => clearTimeout(timer);
   }, [isHomePage]);
 
@@ -160,7 +174,9 @@ export default function Navbar() {
                   href={link.type === "route" ? link.href : `/#${link.hash}`}
                   onClick={(e) => handleNavClick(e, link)}
                   className={`group relative pb-1 text-[11px] xl:text-[12px] font-medium tracking-widest transition-colors duration-200 ${
-                    isActive ? "text-white" : "text-gray-400 hover:text-gray-100"
+                    isActive
+                      ? "text-white"
+                      : "text-gray-400 hover:text-gray-100"
                   }`}
                 >
                   {link.label}
@@ -179,7 +195,10 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:block">
-            <PrimaryButton htmlContent="START MY TIME JUMP" isRightArrow={false} />
+            <PrimaryButton
+              htmlContent="START MY TIME JUMP"
+              isRightArrow={false}
+            />
           </div>
 
           {/* Mobile: Hamburger */}
@@ -249,7 +268,10 @@ export default function Navbar() {
               transition: `opacity 0.3s ease ${navLinks.length * 50}ms, transform 0.3s ease ${navLinks.length * 50}ms`,
             }}
           >
-            <PrimaryButton htmlContent="START MY TIME JUMP" isRightArrow={true} />
+            <PrimaryButton
+              htmlContent="START MY TIME JUMP"
+              isRightArrow={true}
+            />
           </div>
         </div>
       </div>
