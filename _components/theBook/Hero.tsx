@@ -113,6 +113,8 @@ export default function Hero() {
           {/* CTA button (Desktop) */}
           <div className="mt-8 hidden lg:block">
             <PrimaryButton
+              isHref={true}
+              hrefLink="#choose-journey"
               htmlContent="EXPLORE THE BOOKS"
               isRightArrow={true}
             />
@@ -137,6 +139,8 @@ export default function Hero() {
           {/* CTA button (Mobile) */}
           <div className="flex lg:hidden w-full justify-center">
             <PrimaryButton
+              isHref={true}
+              hrefLink="#choose-journey"
               htmlContent="EXPLORE THE BOOKS"
               isRightArrow={true}
             />

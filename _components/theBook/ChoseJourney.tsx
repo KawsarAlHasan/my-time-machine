@@ -3,7 +3,10 @@
 import Image from "next/image";
 import PrimaryTitle from "../ui/PrimaryTitle";
 import SecondaryTitle from "../ui/SecondaryTitle";
-import { useScrollAnimation, getAnimationClasses } from "../ui/useScrollAnimation";
+import {
+  useScrollAnimation,
+  getAnimationClasses,
+} from "../ui/useScrollAnimation";
 
 type Theme = "orange" | "blue";
 
@@ -17,6 +20,7 @@ interface BookCardProps {
   ctaText: string;
   bgImage: string;
   bookImage: string;
+  extarnalUrl: string;
   index: number;
 }
 
@@ -58,11 +62,16 @@ function BookCard({
   ctaText,
   bgImage,
   bookImage,
+  extarnalUrl,
   index,
 }: BookCardProps) {
   const s = themeStyles[theme];
-  const dir = index === 0 ? "left" : "right" as const;
-  const anim = useScrollAnimation({ direction: dir, delay: index * 200, threshold: 0.1 });
+  const dir = index === 0 ? "left" : ("right" as const);
+  const anim = useScrollAnimation({
+    direction: dir,
+    delay: index * 200,
+    threshold: 0.1,
+  });
 
   return (
     <div
@@ -83,7 +92,9 @@ function BookCard({
       </div>
 
       {/* Border overlay */}
-      <div className={`pointer-events-none absolute inset-0 rounded-2xl border ${s.border}`} />
+      <div
+        className={`pointer-events-none absolute inset-0 rounded-2xl border ${s.border}`}
+      />
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col items-center gap-6 p-6 sm:flex-row sm:items-center sm:p-8">
         {/* Left: Book Cover Image */}
@@ -147,7 +158,8 @@ function BookCard({
 
           <button
             type="button"
-            className={`mt-5 inline-flex items-center gap-2 rounded-md border ${s.buttonBorder} bg-black/50 px-5 py-2.5 text-[10px] font-semibold uppercase tracking-widest text-white ${s.buttonGlow} transition-all duration-300 hover:bg-black/70 hover:scale-105`}
+            onClick={() => window.open(extarnalUrl, "_blank")}
+            className={`cursor-pointer mt-5 inline-flex items-center gap-2 rounded-md border ${s.buttonBorder} bg-black/50 px-5 py-2.5 text-[10px] font-semibold uppercase tracking-widest text-white ${s.buttonGlow} transition-all duration-300 hover:bg-black/70 hover:scale-105`}
           >
             {ctaText}
             <svg
@@ -171,10 +183,17 @@ function BookCard({
 }
 
 export default function ChoseJourney() {
-  const header = useScrollAnimation({ direction: "up", delay: 0, threshold: 0.1 });
+  const header = useScrollAnimation({
+    direction: "up",
+    delay: 0,
+    threshold: 0.1,
+  });
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden bg-black px-4 py-12 max-sm:px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
+    <section
+      id="choose-journey"
+      className="min-h-screen w-full overflow-x-hidden bg-black px-4 py-12 max-sm:px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48 scroll-mt-20"
+    >
       {/* Header */}
       <div
         ref={header.ref}
@@ -201,6 +220,7 @@ export default function ChoseJourney() {
           ctaText="Explore the book"
           bgImage="/images/bg-philosophy.png"
           bookImage="/images/philosophy.png"
+          extarnalUrl="https://www.amazon.com/dp/1971594164?lv=shuf&bestFormat=true&social_share=cm_sw_r_ffobk_cso_cp_apin_dp_PAG372RDQYAFVEJNVB0N&channelId=704&ref_=cm_sw_r_ffobk_cso_cp_apin_dp_PAG372RDQYAFVEJNVB0N&plpRedirect=mhFallback"
           index={0}
         />
 
@@ -208,7 +228,7 @@ export default function ChoseJourney() {
           theme="blue"
           eyebrow="My Time Machine —"
           title="The Story"
-          subheading="Meet the person you&apos;re becoming."
+          subheading="Meet the person you're becoming."
           paragraphs={[
             "A time-travel buddy adventure with your future self.",
             "My Time Machine turns the philosophy into a cinematic time-travel adventure, discovering how seemingly small choices can change everything.",
@@ -216,9 +236,10 @@ export default function ChoseJourney() {
           ctaText="Explore the book"
           bgImage="/images/bg-story.png"
           bookImage="/images/story.png"
+          extarnalUrl="https://www.amazon.com/dp/1971594180?lv=shuf&bestFormat=true&social_share=cm_sw_r_ffobk_cso_cp_apin_dp_3M2Z7H7B52YM8XSAC29E&channelId=704&ref_=cm_sw_r_ffobk_cso_cp_apin_dp_3M2Z7H7B52YM8XSAC29E&plpRedirect=mhFallback"
           index={1}
         />
       </div>
-    </div>
+    </section>
   );
 }
